@@ -252,7 +252,7 @@ ${secondLine}"
   render(): TemplateResult {
     if (!this.doc) return html``;
 
-    return html`<md-dialog>
+    return html`<md-dialog @cancel=${(event: Event) => event.preventDefault()}>
       <div slot="headline">Rename IEDs</div>
       <div slot="content">
         <md-outlined-text-field

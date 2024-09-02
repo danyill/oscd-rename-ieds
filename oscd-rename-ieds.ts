@@ -152,25 +152,16 @@ export default class RenameIEDsPlugin extends LitElement {
       .updateComplete;
   }
 
-  duplicatedIedName(): boolean {
-    const newNames = new Map<string, string>();
-
+  duplicatedIedName(iedName: string): boolean {
     if (!this.iedListUI || !this.doc) return false;
 
-    this.doc.querySelectorAll(':root > IED').forEach(ied => {
-      newNames.set(ied.getAttribute('name')!, ied.getAttribute('name')!);
-    });
+    const newNames = Array.from(
+      this.iedListUI.querySelectorAll('md-filled-text-field')
+    ).map(listIed => listIed.value);
 
-    Array.from(this.iedListUI.querySelectorAll('md-filled-text-field')).forEach(
-      listIed => {
-        const id = listIed.getAttribute('data-identity') ?? '';
-        newNames.set(id, listIed.value);
-      }
-    );
+    const iedNames = Array.from(newNames).filter(name => name === iedName);
 
-    const iedNames = Array.from(newNames.values());
-    const uniqueIedNames = [...new Set(iedNames)];
-    return iedNames.length !== uniqueIedNames.length;
+    return iedNames.length !== 1;
   }
 
   customCheckValidity(iedElement: MdFilledTextField): boolean {
@@ -186,7 +177,7 @@ export default class RenameIEDsPlugin extends LitElement {
       iedElement.setCustomValidity(
         'IED name must be > 1 character and < 64 characters.'
       );
-    } else if (this.duplicatedIedName()) {
+    } else if (this.duplicatedIedName(iedElement.value)) {
       iedElement.setCustomValidity('IED name must be unique.');
     } else {
       iedElement.setCustomValidity('');
@@ -222,9 +213,12 @@ ${secondLine}"
             @input="${(event: any) => {
               const iedElement = <MdFilledTextField>event.target;
               this.customCheckValidity(iedElement);
+
               this.allIedNamesValid = Array.from(
                 this.iedListUI.querySelectorAll('md-filled-text-field')
-              ).every(listIed => this.customCheckValidity(listIed));
+              )
+                .map(listIed => this.customCheckValidity(listIed))
+                .reduce((acc, current) => acc && current);
 
               if (iedElement.value !== oldName) {
                 if (!this.iedsToRename.includes(`${oldName}`))

@@ -4708,6 +4708,7 @@ class RenameIEDsPlugin extends s$1 {
         this.iedsToRename = [];
     }
     async run() {
+        var _a;
         if (this.searchIedsUI) {
             this.searchIedsUI.value = '';
         }
@@ -4722,6 +4723,9 @@ class RenameIEDsPlugin extends s$1 {
         }
         this.iedsToRename = [];
         this.allIedNamesValid = true;
+        if (this.searchIedsUI) {
+            Array.from((_a = this.iedListUI) === null || _a === void 0 ? void 0 : _a.querySelectorAll('.item')).forEach(item => item.classList.remove('hidden'));
+        }
         this.dialogUI.show();
     }
     async docUpdate() {
@@ -4876,7 +4880,7 @@ ${secondLine}"
                 const newIedName = textField.value;
                 const oldIedName = textField.getAttribute(`data-old-name`);
                 const ied = this.doc.querySelector(`:root > IED[name="${oldIedName}"]`);
-                if (ied)
+                if (ied && newIedName !== oldIedName)
                     this.dispatchEvent(newEditEvent(updateIED({
                         element: ied,
                         attributes: { name: newIedName },

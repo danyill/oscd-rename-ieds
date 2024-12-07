@@ -332,7 +332,7 @@ ${secondLine}"
                   `:root > IED[name="${oldIedName}"]`
                 );
 
-                if (ied)
+                if (ied && newIedName !== oldIedName)
                   this.dispatchEvent(
                     newEditEvent(
                       updateIED({

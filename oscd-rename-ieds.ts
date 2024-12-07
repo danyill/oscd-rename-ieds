@@ -144,6 +144,12 @@ export default class RenameIEDsPlugin extends LitElement {
     this.iedsToRename = [];
     this.allIedNamesValid = true;
 
+    if (this.searchIedsUI) {
+      Array.from(this.iedListUI?.querySelectorAll('.item')).forEach(item =>
+        item.classList.remove('hidden')
+      );
+    }
+
     this.dialogUI.show();
   }
 

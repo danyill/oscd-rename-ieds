@@ -2,7 +2,7 @@ import { css, html, LitElement, TemplateResult } from 'lit';
 import { property, query, queryAll, state } from 'lit/decorators.js';
 
 import { updateIED } from '@openenergytools/scl-lib';
-import { newEditEvent } from '@openscd/open-scd-core';
+import { newEditEvent } from '@openenergytools/open-scd-core';
 
 import type { MdDialog } from '@material/web/dialog/dialog.js';
 import type { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';

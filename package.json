@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@material/web": "^1.0.1",
-    "@openenergytools/scl-lib": "^0.5.13",
-    "@openscd/open-scd-core": "^0.0.2",
+    "@openenergytools/open-scd-core": "^0.0.5",
+    "@openenergytools/scl-lib": "^1.1.0",
     "lit": "^3.0.0"
   },
   "devDependencies": {

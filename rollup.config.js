@@ -4,7 +4,7 @@ import typescript from '@rollup/plugin-typescript';
 import copy from 'rollup-plugin-copy';
 
 export default {
-  input: './oscd-rename-ieds.ts',
+  input: ['./oscd-rename-ieds.ts', './openscd.ts'],
   output: {
     sourcemap: true, // Add source map to build output
     format: 'es', // ES module type export

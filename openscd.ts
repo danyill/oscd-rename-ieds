@@ -1,1 +1,1 @@
-import '@openenergytools/open-scd-core/open-scd.js';
+import '@omicronenergy/open-scd-core/open-scd.js';
